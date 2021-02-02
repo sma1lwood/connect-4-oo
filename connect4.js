@@ -1,9 +1,11 @@
 /** Connect Four
+ * 
  *
  * Player 1 and 2 alternate turns. On each turn, a piece is dropped down a
  * column until a player gets four-in-a-row (horiz, vert, or diag) or until
  * board fills (tie)
  */
+
 class Game {
   constructor(width = 7, height = 6, p1, p2) {
     this.width = width;
@@ -23,7 +25,6 @@ class Game {
 /** makeBoard: create in-JS board structure:
  *   board = array of rows, each row is array of cells  (board[y][x])
  */
-
 makeBoard(){
   this.board = []; // array of rows, each row is array of cells  (board[y][x])
   for (let y = 0; y < this.height; y++) {
@@ -39,9 +40,12 @@ makeHtmlBoard() {
   // make column tops (clickable area for adding a piece to that column)
   const top = document.createElement('tr');
   top.setAttribute('id', 'column-top');
-  this.handleGameclick = this.handleGameClick.bind(this);
+  top.addEventListener('click', this.handleClick.bind(this));
 
-  top.addEventListener('click', handleClick);
+
+
+  // top.handleGameclick = .handleGameClick.bind(this);
+
 
   for (let x = 0; x < this.width; x++) {
     const headCell = document.createElement('td');
@@ -51,6 +55,7 @@ makeHtmlBoard() {
 
   board.append(top);
 
+  
   // make main part of board
   for (let y = 0; y < this.height; y++) {
     const row = document.createElement('tr');
@@ -87,8 +92,10 @@ placeInTable(y, x) {
   const spot = document.getElementById(`${y}-${x}`);
   spot.append(piece);
 }
-
-/** endGame: announce game end */
+endGame(msg){
+  alert(msg);
+}
+/** endGame: announcement
 
 function endGame(msg) {
   alert(msg);
